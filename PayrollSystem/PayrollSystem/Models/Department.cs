@@ -1,5 +1,3 @@
-using PayrollSystem.Models;
-
 namespace PayrollSystem.Models
 {
     /// <summary>

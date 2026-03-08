@@ -8,8 +8,6 @@ namespace PayrollSystem.Models
     {
         private string _firstName = string.Empty;
         private string _lastName = string.Empty;
-        private string? _email;
-        private string? _phoneNumber;
 
         public string FirstName
         {
@@ -27,17 +25,9 @@ namespace PayrollSystem.Models
 
         public DateTime DateOfBirth { get; set; }
 
-        public string? Email
-        {
-            get => _email;
-            set => _email = value;
-        }
+        public string? Email { get; set; }
 
-        public string? PhoneNumber
-        {
-            get => _phoneNumber;
-            set => _phoneNumber = value;
-        }
+        public string? PhoneNumber { get; set; }
 
         protected Person(string firstName, string lastName)
         {

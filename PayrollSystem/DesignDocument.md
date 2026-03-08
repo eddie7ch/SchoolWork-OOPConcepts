@@ -231,7 +231,7 @@ TOTALS            $8,657.69    $3,759.44     $4,898.25
 
 ```
 PayrollSystem/
-├── PayrollSystem.sln
+├── PayrollSystem.slnx
 └── PayrollSystem/
     ├── Program.cs               ← Demo / entry point
     ├── Enums/
