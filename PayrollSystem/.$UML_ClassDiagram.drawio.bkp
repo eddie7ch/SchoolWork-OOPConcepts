@@ -1,0 +1,286 @@
+<mxfile host="app.diagrams.net" modified="2026-03-07T00:00:00.000Z" agent="GitHub Copilot" version="21.0.0" type="device">
+  <diagram id="payroll-uml" name="Payroll System Class Diagram">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- Person (abstract)                                       -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="Person" value="&lt;i&gt;&lt;&lt;abstract&gt;&gt;&lt;/i&gt;&lt;br/&gt;&lt;b&gt;Person&lt;/b&gt;" style="swimlane;startSize=40;fontStyle=1;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="560" y="40" width="260" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="Person_attrs" value="- _firstName : string&#xa;- _lastName : string&#xa;- _email : string?&#xa;- _phoneNumber : string?&#xa;+ Address : string?&#xa;+ DateOfBirth : DateTime" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="Person">
+          <mxGeometry x="0" y="40" width="260" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="Person_sep1" value="" style="line;strokeColor=#6c8ebf;fillColor=#dae8fc;" vertex="1" parent="Person">
+          <mxGeometry x="0" y="135" width="260" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="Person_methods" value="+ GetFullName() : string&#xa;+ ToString() : string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="Person">
+          <mxGeometry x="0" y="145" width="260" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- Employee (abstract)                                     -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="Employee" value="&lt;i&gt;&lt;&lt;abstract&gt;&gt;&lt;/i&gt;&lt;br/&gt;&lt;b&gt;Employee&lt;/b&gt;" style="swimlane;startSize=40;fontStyle=1;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="560" y="320" width="260" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="Employee_attrs" value="+ EmployeeId : string&#xa;+ HireDate : DateTime&#xa;+ Position : string&#xa;+ Department : Department?&#xa;+ EmployeeType : EmployeeType&#xa;+ Benefits : List&lt;BenefitDeduction&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="Employee">
+          <mxGeometry x="0" y="40" width="260" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="Employee_sep1" value="" style="line;strokeColor=#6c8ebf;fillColor=#dae8fc;" vertex="1" parent="Employee">
+          <mxGeometry x="0" y="140" width="260" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="Employee_methods" value="+ CalculateGrossPay() : decimal  &lt;i&gt;{abstract}&lt;/i&gt;&#xa;+ CalculateNetPay(taxes) : decimal&#xa;+ AddBenefit(benefit) : void&#xa;+ GeneratePayStub(period, taxes)&#xa;    : PayStub" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="Employee">
+          <mxGeometry x="0" y="150" width="260" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Person → Employee inheritance -->
+        <mxCell id="edge_Person_Employee" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#6c8ebf;" edge="1" source="Employee" target="Person" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- FullTimeEmployee                                        -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="FullTimeEmployee" value="&lt;b&gt;FullTimeEmployee&lt;/b&gt;" style="swimlane;startSize=30;fontStyle=1;align=center;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="280" y="660" width="240" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="FTE_attrs" value="+ AnnualSalary : decimal" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="FullTimeEmployee">
+          <mxGeometry x="0" y="30" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="FTE_sep" value="" style="line;strokeColor=#82b366;fillColor=#d5e8d4;" vertex="1" parent="FullTimeEmployee">
+          <mxGeometry x="0" y="60" width="240" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="FTE_methods" value="+ CalculateGrossPay() : decimal&#xa;    (AnnualSalary / 26)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="FullTimeEmployee">
+          <mxGeometry x="0" y="70" width="240" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Employee → FullTimeEmployee inheritance -->
+        <mxCell id="edge_Emp_FTE" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#82b366;" edge="1" source="FullTimeEmployee" target="Employee" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- PartTimeEmployee                                        -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="PartTimeEmployee" value="&lt;b&gt;PartTimeEmployee&lt;/b&gt;" style="swimlane;startSize=30;fontStyle=1;align=center;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="860" y="660" width="240" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="PTE_attrs" value="+ HourlyRate : decimal&#xa;+ HoursWorked : double" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="PartTimeEmployee">
+          <mxGeometry x="0" y="30" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PTE_sep" value="" style="line;strokeColor=#82b366;fillColor=#d5e8d4;" vertex="1" parent="PartTimeEmployee">
+          <mxGeometry x="0" y="70" width="240" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="PTE_methods" value="+ CalculateGrossPay() : decimal&#xa;    (HourlyRate × HoursWorked)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="PartTimeEmployee">
+          <mxGeometry x="0" y="80" width="240" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- Employee → PartTimeEmployee inheritance -->
+        <mxCell id="edge_Emp_PTE" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#82b366;" edge="1" source="PartTimeEmployee" target="Employee" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- Department                                              -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="Department" value="&lt;b&gt;Department&lt;/b&gt;" style="swimlane;startSize=30;fontStyle=1;align=center;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="40" y="330" width="240" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="Dept_attrs" value="+ DepartmentId : string&#xa;+ Name : string&#xa;+ Manager : Employee?&#xa;- _employees : List&lt;Employee&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="Department">
+          <mxGeometry x="0" y="30" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Dept_sep" value="" style="line;strokeColor=#d6b656;fillColor=#fff2cc;" vertex="1" parent="Department">
+          <mxGeometry x="0" y="100" width="240" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="Dept_methods" value="+ AddEmployee(e) : void&#xa;+ RemoveEmployee(id) : bool&#xa;+ GetEmployeeCount() : int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="Department">
+          <mxGeometry x="0" y="110" width="240" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Employee — Department  association (many employees to one dept) -->
+        <mxCell id="edge_Emp_Dept" value="works in" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#d6b656;endArrow=open;endFill=0;startArrow=none;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="Employee" target="Department" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="540" y="445" />
+              <mxPoint x="300" y="445" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lbl_emp_dept_src" value="*" style="resizable=0;html=1;" vertex="1" connectable="0" parent="edge_Emp_Dept">
+          <mxGeometry x="-0.85" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="lbl_emp_dept_tgt" value="1" style="resizable=0;html=1;" vertex="1" connectable="0" parent="edge_Emp_Dept">
+          <mxGeometry x="0.85" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- Deduction (abstract)                                    -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="Deduction" value="&lt;i&gt;&lt;&lt;abstract&gt;&gt;&lt;/i&gt;&lt;br/&gt;&lt;b&gt;Deduction&lt;/b&gt;" style="swimlane;startSize=40;fontStyle=1;align=center;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="330" width="260" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="Ded_attrs" value="+ DeductionId : string&#xa;+ Name : string&#xa;+ Description : string?" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="Deduction">
+          <mxGeometry x="0" y="40" width="260" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="Ded_sep" value="" style="line;strokeColor=#b85450;fillColor=#f8cecc;" vertex="1" parent="Deduction">
+          <mxGeometry x="0" y="95" width="260" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="Ded_methods" value="+ CalculateDeduction(grossPay)&#xa;    : decimal  &lt;i&gt;{abstract}&lt;/i&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="Deduction">
+          <mxGeometry x="0" y="105" width="260" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- TaxDeduction                                            -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="TaxDeduction" value="&lt;b&gt;TaxDeduction&lt;/b&gt;" style="swimlane;startSize=30;fontStyle=1;align=center;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="600" width="230" height="155" as="geometry" />
+        </mxCell>
+        <mxCell id="Tax_attrs" value="+ TaxType : TaxType&#xa;+ TaxRate : decimal" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="TaxDeduction">
+          <mxGeometry x="0" y="30" width="230" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="Tax_sep" value="" style="line;strokeColor=#d79b00;fillColor=#ffe6cc;" vertex="1" parent="TaxDeduction">
+          <mxGeometry x="0" y="75" width="230" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="Tax_methods" value="+ CalculateDeduction(grossPay)&#xa;    : decimal&#xa;    (grossPay × TaxRate)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="TaxDeduction">
+          <mxGeometry x="0" y="85" width="230" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Deduction → TaxDeduction inheritance -->
+        <mxCell id="edge_Ded_Tax" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#d79b00;" edge="1" source="TaxDeduction" target="Deduction" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- BenefitDeduction                                        -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="BenefitDeduction" value="&lt;b&gt;BenefitDeduction&lt;/b&gt;" style="swimlane;startSize=30;fontStyle=1;align=center;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="1310" y="600" width="240" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="Ben_attrs" value="+ BenefitType : BenefitType&#xa;+ EmployeeContribution : decimal&#xa;+ EmployerContribution : decimal" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="BenefitDeduction">
+          <mxGeometry x="0" y="30" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="Ben_sep" value="" style="line;strokeColor=#d79b00;fillColor=#ffe6cc;" vertex="1" parent="BenefitDeduction">
+          <mxGeometry x="0" y="85" width="240" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="Ben_methods" value="+ CalculateDeduction(grossPay)&#xa;    : decimal&#xa;    (fixed EmployeeContribution)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="BenefitDeduction">
+          <mxGeometry x="0" y="95" width="240" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Deduction → BenefitDeduction inheritance -->
+        <mxCell id="edge_Ded_Ben" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#d79b00;" edge="1" source="BenefitDeduction" target="Deduction" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- PayPeriod                                               -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="PayPeriod" value="&lt;b&gt;PayPeriod&lt;/b&gt;" style="swimlane;startSize=30;fontStyle=1;align=center;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="40" y="660" width="220" height="145" as="geometry" />
+        </mxCell>
+        <mxCell id="PP_attrs" value="+ StartDate : DateTime&#xa;+ EndDate : DateTime&#xa;+ PeriodType : PayPeriodType" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="PayPeriod">
+          <mxGeometry x="0" y="30" width="220" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="PP_sep" value="" style="line;strokeColor=#9673a6;fillColor=#e1d5e7;" vertex="1" parent="PayPeriod">
+          <mxGeometry x="0" y="85" width="220" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="PP_methods" value="+ GetPeriodDescription() : string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="PayPeriod">
+          <mxGeometry x="0" y="93" width="220" height="42" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- PayStub                                                 -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="PayStub" value="&lt;b&gt;PayStub&lt;/b&gt;" style="swimlane;startSize=30;fontStyle=1;align=center;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="540" y="880" width="260" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="PS_attrs" value="+ PayStubId : string&#xa;+ Employee : Employee&#xa;+ PayPeriod : PayPeriod&#xa;+ GrossPay : decimal&#xa;+ IssuedDate : DateTime&#xa;+ TotalDeductions : decimal&#xa;+ NetPay : decimal" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="PayStub">
+          <mxGeometry x="0" y="30" width="260" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="PS_sep" value="" style="line;strokeColor=#9673a6;fillColor=#e1d5e7;" vertex="1" parent="PayStub">
+          <mxGeometry x="0" y="145" width="260" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="PS_methods" value="+ AddDeduction(d) : void&#xa;+ Print() : void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="PayStub">
+          <mxGeometry x="0" y="153" width="260" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Employee → PayStub association -->
+        <mxCell id="edge_Emp_PS" value="generates" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#9673a6;endArrow=open;endFill=0;" edge="1" source="Employee" target="PayStub" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- PayPeriod → PayStub association -->
+        <mxCell id="edge_PP_PS" value="covers" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#9673a6;endArrow=open;endFill=0;" edge="1" source="PayPeriod" target="PayStub" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- PayStub → Deduction aggregation -->
+        <mxCell id="edge_PS_Ded" value="aggregates" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;endArrow=open;endFill=0;startArrow=ERmany;startFill=0;" edge="1" source="PayStub" target="Deduction" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- PayrollProcessor                                        -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="PayrollProcessor" value="&lt;b&gt;PayrollProcessor&lt;/b&gt;" style="swimlane;startSize=30;fontStyle=1;align=center;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="280" y="880" width="240" height="195" as="geometry" />
+        </mxCell>
+        <mxCell id="PRP_attrs" value="- _employees : List&lt;Employee&gt;&#xa;- _companyTaxes : List&lt;TaxDeduction&gt;&#xa;+ Employees : IReadOnlyList" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="PayrollProcessor">
+          <mxGeometry x="0" y="30" width="240" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="PRP_sep" value="" style="line;strokeColor=#d79b00;fillColor=#ffe6cc;" vertex="1" parent="PayrollProcessor">
+          <mxGeometry x="0" y="85" width="240" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="PRP_methods" value="+ RegisterEmployee(e) : void&#xa;+ RemoveEmployee(id) : bool&#xa;+ AddCompanyTax(tax) : void&#xa;+ ProcessPayroll(period)&#xa;    : List&lt;PayStub&gt;&#xa;+ GenerateReport(stubs, type)&#xa;    : PayrollReport" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="PayrollProcessor">
+          <mxGeometry x="0" y="93" width="240" height="95" as="geometry" />
+        </mxCell>
+
+        <!-- PayrollProcessor → Employee association -->
+        <mxCell id="edge_PRP_Emp" value="manages" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#d79b00;endArrow=open;endFill=0;" edge="1" source="PayrollProcessor" target="Employee" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- PayrollProcessor → PayStub dependency -->
+        <mxCell id="edge_PRP_PS" value="" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#d79b00;endArrow=open;endFill=0;dashed=1;" edge="1" source="PayrollProcessor" target="PayStub" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- PayrollReport                                           -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="PayrollReport" value="&lt;b&gt;PayrollReport&lt;/b&gt;" style="swimlane;startSize=30;fontStyle=1;align=center;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="820" y="880" width="260" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="PR_attrs" value="+ ReportId : string&#xa;+ GeneratedDate : DateTime&#xa;+ ReportType : ReportType&#xa;+ PayStubs : IReadOnlyList&lt;PayStub&gt;&#xa;+ TotalGrossPay : decimal&#xa;+ TotalDeductions : decimal&#xa;+ TotalNetPay : decimal" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="PayrollReport">
+          <mxGeometry x="0" y="30" width="260" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="PR_sep" value="" style="line;strokeColor=#d79b00;fillColor=#ffe6cc;" vertex="1" parent="PayrollReport">
+          <mxGeometry x="0" y="145" width="260" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="PR_methods" value="+ Generate() : void&#xa;+ Export(filePath) : void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;" vertex="1" parent="PayrollReport">
+          <mxGeometry x="0" y="153" width="260" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- PayrollProcessor → PayrollReport dependency -->
+        <mxCell id="edge_PRP_PR" value="produces" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#d79b00;endArrow=open;endFill=0;dashed=1;" edge="1" source="PayrollProcessor" target="PayrollReport" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- PayrollReport → PayStub aggregation -->
+        <mxCell id="edge_PR_PS" value="summarises" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#9673a6;endArrow=open;endFill=0;" edge="1" source="PayrollReport" target="PayStub" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!-- Enumerations (notes)                                    -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <mxCell id="enum_note" value="&lt;b&gt;Enumerations&lt;/b&gt;&#xa;&#xa;«enum» EmployeeType&#xa;  FullTime | PartTime&#xa;&#xa;«enum» TaxType&#xa;  Federal | Provincial | CPP | EI&#xa;&#xa;«enum» BenefitType&#xa;  Health | Dental | Vision&#xa;  Pension | LifeInsurance&#xa;&#xa;«enum» PayPeriodType&#xa;  Weekly | BiWeekly&#xa;  SemiMonthly | Monthly&#xa;&#xa;«enum» ReportType&#xa;  Summary | Detailed&#xa;  TaxReport | YearToDate" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;overflow=hidden;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="40" width="240" height="240" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

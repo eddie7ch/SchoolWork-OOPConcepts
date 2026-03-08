@@ -1,0 +1,56 @@
+<mxGraphModel>
+  <root>
+    <Theme name="HighContrast">
+      <!--
+        High-Contrast WCAG AA Theme for draw.io
+        =========================================
+        HOW TO USE
+        ----------
+        Option A – Apply to a new diagram:
+          1. Open draw.io desktop.
+          2. Go to View > Reset Default Style, then manually set:
+               Vertex fill: #FFFFFF, stroke: #000000, font: #000000
+               Edge stroke: #000000, font: #000000
+
+        Option B – Paste defaults via Extras > Edit Diagram:
+          Copy the defaultVertexStyle / defaultEdgeStyle attributes
+          below onto the <mxGraphModel> opening tag in your diagram XML.
+
+        Option C – These values are already baked into UML_ClassDiagram.drawio.
+
+        RULES
+        -----
+        • Dark text (#000000 / #1A1A1A) on light backgrounds.
+        • Light text (#FFFFFF) on dark backgrounds (headers ≤ #333333).
+        • WCAG AA minimum: 4.5:1 normal text, 3:1 large/bold text.
+        • No gradients, no transparency, no saturated fills behind text.
+        • Readable at 50% zoom.
+      -->
+      <add as="defaultVertexStyle">
+        <Style>
+          shape=rectangle;
+          fillColor=#FFFFFF;
+          strokeColor=#000000;
+          fontColor=#000000;
+          gradientColor=none;
+          opacity=100;
+          rounded=0;
+        </Style>
+      </add>
+      <add as="defaultEdgeStyle">
+        <Style>
+          strokeColor=#000000;
+          fontColor=#000000;
+          edgeStyle=orthogonalEdgeStyle;
+          rounded=0;
+        </Style>
+      </add>
+      <add as="defaultTextStyle">
+        <Style>
+          fontColor=#000000;
+          fontSize=14;
+        </Style>
+      </add>
+    </Theme>
+  </root>
+</mxGraphModel>
