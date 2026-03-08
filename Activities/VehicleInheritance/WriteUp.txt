@@ -1,0 +1,46 @@
+Vehicle Inheritance Hierarchy — Design Write-Up
+================================================
+
+Overview
+--------
+This program demonstrates inheritance in C# by modeling a simple vehicle hierarchy.
+A base class (Vehicle) holds common attributes shared by all vehicles, while three
+subclasses (Car, Motorcycle, Truck) each extend it with their own specific attributes
+and behaviors.
+
+Design Choices
+--------------
+
+1. Base Class — Vehicle
+   The Vehicle class holds two attributes common to every vehicle: Manufacturer (string)
+   and Year (int). These are declared as read-only properties with a constructor that
+   requires both values at creation time. This ensures every vehicle object is always
+   initialized with valid, complete data.
+
+2. Inheritance — Car, Motorcycle, Truck
+   Each subclass uses the ": Vehicle" syntax to inherit from the base class. Their
+   constructors call "base(manufacturer, year)" to delegate initialization of the shared
+   attributes to the parent class, avoiding code duplication and following the DRY
+   (Don't Repeat Yourself) principle.
+
+   - Car adds NumberOfDoors (int) and a Start() method that prints a startup message.
+   - Motorcycle adds HasSideCar (bool) and a Wheelie() method.
+   - Truck adds CarryingCapacity (double) and a LoadCargo(double weight) method that
+     reports how much cargo was loaded.
+
+3. Encapsulation
+   All attributes are exposed as public read-only properties (get-only), meaning they
+   can be read from outside the class but only set through the constructor. This prevents
+   accidental modification of an object's core data after it has been created.
+
+4. Demonstration in Main
+   The main program creates one instance of each subclass, prints their shared attributes
+   (Manufacturer, Year) alongside their unique attributes, and calls each class-specific
+   method to show polymorphic behavior in action.
+
+Summary
+-------
+By placing shared data in a base class and extending it with subclasses, this design
+avoids repeating the Manufacturer and Year fields in every class. Each subclass only
+defines what makes it unique, which makes the code easier to read, maintain, and extend
+in the future (e.g., adding a new vehicle type like Bus would require minimal effort).
