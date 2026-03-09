@@ -1,0 +1,19 @@
+{
+  "folders": [
+    {
+      "name": "Activities",
+      "path": "Activities"
+    },
+    {
+      "name": "Assignments",
+      "path": "Assignments"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/bin": true,
+      "**/obj": true,
+      "**/.vs": true
+    }
+  }
+}
