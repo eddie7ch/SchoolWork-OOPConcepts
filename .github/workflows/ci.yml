@@ -1,0 +1,20 @@
+name: OOP Concepts CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.x"
+      - name: Restore all projects
+        run: find . -name "*.csproj" | xargs -I {} dotnet restore {}
+      - name: Build all projects
+        run: find . -name "*.csproj" | xargs -I {} dotnet build {} --no-restore --configuration Release
